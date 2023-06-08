@@ -1,0 +1,261 @@
+{
+    "auth": {
+        "user": "",
+        "pass": "",
+        "url": "demo.platforma365.com"
+    },
+    "datetime_format": "%d-%m-%Y %H:%M",
+    "date_format": "%d-%m-%Y",
+    "steps": {
+        "list_of_companies": {
+            "route": ["click: XP: .//li[3]"],
+            "steps": {
+                "company_info": {
+                    "route": [
+                        "link: https://demo.platforma365.com/index.php?ss=ci&id=3d15cc55604db11056647d749cbf3b2add74aecb59381cf375cf458eb9c4c90c"
+                    ],
+                    "steps": {
+                        "general_info": {
+                            "skip": true,
+                            "route": ["click: XP: .//a[@id='company--baseinfo-tab']"],
+                            "steps": {
+                                "contact_info": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_baseinfo']/table",
+
+                                    "table_type": "vertical",
+
+                                    "to_test": ["refresh|type:spinning", "edit"],
+
+                                    "columns": {"Tags": "select2m"}
+                                },
+                                "custom_fields": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_custominfo']/table",
+                                    
+                                    "table_type": "horizontal",
+
+                                    "to_test": ["refresh|type:spinning", "edit"],
+
+                                    "on_start": ["test_check_all"],
+                                    "on_iteration": ["check_checkbox_randomly"],
+                                    "on_end": ["add_to_report_notes"]
+                                },
+                                "social_media": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_socialmedia']/table",
+
+                                    "table_type": "horizontal",
+
+                                    "to_test": ["refresh|type:spinning", "edit"],
+
+                                    "columns": {"Social Media Name": "select2t|specify:Other", "Link": "str"}
+                                }
+                            }
+                        },
+                        "basic_info": {
+                            "skip": true,
+                            "route": ["click: XP: .//a[@id='company--info-tab']"],
+                            "steps": {
+                                "government_records": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_government_info']/table",
+
+                                    "table_type": "vertical",
+                                    
+                                    "to_test": ["refresh|type:spinning", "edit"],
+                                    
+                                    "columns": {"Jurisdiction": "select2", "Date of Registration": "date"},
+                                    "on_before_edit": ["readName"],
+                                    "on_after_edit": ["checkName"]
+                                },
+                                "corporate_records": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_corporate_info']/table",
+
+                                    "table_type": "vertical",
+                                    
+                                    "to_test": ["refresh|type:spinning", "edit", "clone|table:government_records"],
+                                    
+                                    "columns": {"Jurisdiction": "select2", "Date of Registration": "date"},
+                                    "on_before_edit": ["readName"],
+                                    "on_after_edit": ["checkName"]
+                                },
+                                "company_website": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_website_info']/table",
+
+                                    "table_type": "vertical",
+                                    
+                                    "to_test": ["refresh|type:spinning", "edit", "clone|table:government_records"],
+                                    
+                                    "columns": {"Jurisdiction": "select2", "Date of Registration": "date"}
+                                },
+                                "notes_for_basic_company_info": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_note_info']/table",
+
+                                    "table_type": "one-celled",
+
+                                    "to_test": ["refresh|type:spinning", "edit"]
+                                }
+                            }
+                        },
+                        "business_description": {
+                            "skip": true,
+                            "route": ["click: XP: .//a[@id='company--actprof-tab']"],
+                            "steps": {
+                                "industry": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_company_activity_profile']//table[@id='tbl_business_area']",
+
+                                    "table_type": "edit-only-horizontal",
+
+                                    "to_test": ["edit"],
+
+                                    "columns": {"Base Activity": "select2|rule:base_only", "Sub Activity": "select2|rule:sub_activity"}
+                                },
+                                "summary": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_company_activity_profile']//textarea",
+
+                                    "table_type": "edit-only-textarea",
+
+                                    "to_test": ["edit"],
+
+                                    "columns": {"Summary": "textarea"}
+                                },
+                                "business_activity": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_company_activity_profile']//table[@id='tbl_company_business_activity']",
+
+                                    "table_type": "edit-only-vertical",
+
+                                    "to_test": ["edit"],
+
+                                    "columns": {
+                                        "0": "bool|specify:If yes, please fill the license No.|rule:toggle_input",
+                                        "1": "bool|specify:If yes. Please specify the institution|rule:toggle_input",
+                                        "2": "textarea",
+                                        "3": "select2m",
+                                        "4": "select2m",
+                                        "5": "radio",
+                                        "6": "radio",
+                                        "7": "cb|specify:Other (specify)|rule:toggle_input",
+                                        "8": "cb|specify:Other (specify)|rule:toggle_input"
+                                    }
+                                },
+                                "financial_infromation": {
+                                    "type": "table",
+                                    "table_path": "XP: (.//form[@id='frm_company_activity_profile']//table)[3]",
+
+                                    "table_type": "edit-only-vertical",
+
+                                    "to_test": ["edit"],
+
+                                    "columns": {
+                                        "0": "cb",
+                                        "1": "cb|specify:Other (specify)|rule:toggle_input",
+                                        "2": "cb|specify:Other|rule:toggle_input",
+                                        "3": "number-grid"
+                                    }
+                                },
+                                "incoming_payments": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_company_activity_profile']//table[@id='tbl_business_incoming_payment']",
+
+                                    "table_type": "edit-only-horizontal",
+
+                                    "to_test": ["edit"],
+
+                                    "columns": {"Incorporation country": "select2"}
+                                },
+                                "outgoing_payments": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_company_activity_profile']//table[@id='tbl_business_outgoing_payment']",
+
+                                    "table_type": "edit-only-horizontal",
+
+                                    "to_test": ["edit"],
+
+                                    "columns": {"Incorporation country": "select2"}
+                                },
+                                "url_associated": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_company_activity_profile']//table[@id='tbl_business_url_company']",
+
+                                    "table_type": "edit-only-horizontal",
+
+                                    "to_test": ["edit"]
+                                },
+                                "licences_and_permits": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_company_activity_profile']//table[@id='tbl_business_gaming']",
+
+                                    "table_type": "edit-only-horizontal",
+
+                                    "to_test": ["edit"],
+
+                                    "columns": {"Date Issued": "date"}
+                                }
+                            }
+                        },
+                        "bank_accounts": {
+                            "skip": true,
+                            "route": ["click: XP: .//a[@id='company--bank-tab']"],
+                            "steps": {
+                                "bank_requisited": {
+                                    "type": "table",
+                                    "table_path": "XP: .//form[@id='frm_bankreq']/table[@id='tbl_bankreq']",
+                                    
+                                    "table_type": "horizontal",
+
+                                    "to_test": ["refresh|type:spinning", "edit"],
+
+                                    "columns": {"Status": "select", "Country": "select"}
+                                }
+                            }
+                        },
+                        "participations": {
+                            "route": ["click: XP: .//a[@id='company--company-tab']"],
+                            "steps": {
+                                "government_records": {
+                                    "type": "table",
+                                    "table_path": "XP: .//table[@id='tbl_company_company_relevant_list']",
+                                    
+                                    "table_type": "datatable",
+
+                                    "to_test": ["refresh|type:static", "edit", "add_self_holder", "pagination", "search", "showing", "ordering", "participation_correspondance"],
+
+                                    "columns": {
+                                        "Corporate Name": "link|rule:correct_company_link", 
+                                        "Jurisdiction": "text|rule:correct_jurisdiction",
+                                        "Shares": "text|rule:correct_shares",
+                                        "UBO": "text|rule:correct_ubo",
+                                        "Position": "text|rule:correct_position"
+                                    }
+                                },
+                                "corporate_records": {
+                                    "type": "table",
+                                    "table_path": "XP: .//table[@id='tbl_company_company_corp_relevant_list']",
+                                    
+                                    "table_type": "datatable",
+
+                                    "to_test": ["refresh|type:static", "edit", "add_self_holder", "pagination", "search", "showing", "ordering", "participation_correspondance"],
+
+                                    "columns": {
+                                        "Corporate Name": "link|rule:correct_company_link", 
+                                        "Jurisdiction": "text|rule:correct_jurisdiction",
+                                        "Shares": "text|rule:correct_shares",
+                                        "UBO": "text|rule:correct_ubo",
+                                        "Position": "text|rule:correct_position"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

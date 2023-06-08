@@ -1,0 +1,73 @@
+{
+    "refresh_button": "XP: .//following::button[contains(@class,'refresh')]",
+    
+    "rows": "XP: ./tbody/tr",
+    "template_row": "XP: ./tbody/tr[contains(@class, 'new-row') or contains(@class, 'tr_add_template')]",
+    "visible_rows": "XP: ./tbody/tr[not(contains(@class, 'new-row') or contains(@class, 'tr_add_template'))]",
+    "vertical_row": "XP: ./tbody/tr/td[2]",
+    "one_celled": "XP: ./tbody/tr/td",
+
+    "row_cells": "XP: ./td",
+    "editable_cells": "XP: ./td/*[self::input or self::textarea or self::select]/..",
+    "cells_editing": "XP: ./td/div[contains(@class,'edit-mode')]/*[self::input or self::textarea or self::select]/../..",
+    "edit_only_row_cells_editing": "XP: ./td[not(./button/i[contains(@class,'fa-trash')])]",
+    "cells_reading": "XP: ./td/div[not(contains(@class,'edit-mode'))]/..",
+    "row_delete_button": "XP: .//i[contains(@class, 'fa-trash')]/..",
+
+    "row_headers": "XP: ./ancestor::table//th",
+    "vertical_headers": "XP: ./tbody//td[1]",
+    "one_celled_title": "XP: ./preceding::h4[1]",
+
+    "table_headers": "XP: ./thead/tr/th",
+    "table_vertical_headers": "XP: ./tbody/tr/td[1]",
+
+    "headers" : "TA: th",
+
+    "tags": "XP: ./*[@class='show-mode']/span",
+    "cell_delete_button": "TA: button",
+    "pagination_row_from_table" : {
+        "pagination" : "XP: ./parent::div/parent::div/following-sibling::div[@class='row']",
+        "max_page" : "XP: .//ul[@class='pagination']/li[not(contains(@class, 'previous')) and not(contains(@class, 'next'))][last()]",
+        "page" : "XP: .//ul[@class='pagination']/li[./a[text() = '{0}']]",
+        "prev_btn" : "XP: .//ul[@class='pagination']/li[contains(@class, 'previous')]",
+        "next_btn" : "XP: .//ul[@class='pagination']/li[contains(@class, 'next')]",
+        "active_page" : "XP: .//ul/li[contains(@class,'active')]",
+        "number_of_filtered" : "XP: .//div"
+    },
+    "footer": {
+        "save" : "XP: .//tfoot//button[text()='Save'] | ../following::div/button[text()='Save']",
+        "edit" : "XP: .//tfoot//button[text()='Edit']",
+        "cancel" : "XP: .//tfoot//button[text()='Exit Editing']",
+        "refresh" : "XP: .//tfoot//button[text()='Refresh']",
+        "add_row" : "XP: .//tfoot//button[text()='Add row' or text()='Add Row'] | .//descendant::button/i[contains(@class,'fa-plus')]/..",
+        "clone": "XP: .//tfoot//button[starts-with(text(),'Clone')]"
+    },
+    "edit_div": "XP: ./div[contains(@class,'edit-mode')]",
+    "show_div": "XP: ./div[contains(@class,'show-mode')]",
+    "cell_input": "XP: .//*[self::textarea or (self::input and (not(@type) or @type='text'))][not(@type='hidden')]",
+    "datepicker": {
+        "input": "XP: .//input[contains(@class, 'date-picker')]",
+        "available_dates": "XP: ./ancestor::body//div[@id='ui-datepicker-div']//tbody//a[not(contains(@class,'active'))]"
+    },
+    "cell_select": "XP: .//select",
+    "select2" : {
+        "title_span": "XP: ./span[contains(@class,'select2')]//span[contains(@class, 'rendered')]",
+        "input": "XP: ./span[contains(@class,'select2')]",
+        "block": "XP: ./ancestor::body//span[contains(@class,'select2-container--open') and contains(@style, 'position: absolute;')]",
+        "selected_tags": "XP: .//li[contains(@class, '__choice')]/span",
+        "available_tag": "XP: ./ancestor::body//span[contains(@class,'select2-container--open') and contains(@style, 'position: absolute;')]//li[not(@aria-selected='true' or @aria-disabled='true')]",
+        "available_tags": "XP: ./ancestor::body//span[contains(@class,'select2-container--open') and contains(@style, 'position: absolute;')]//li[not(@aria-selected='true' or @aria-disabled='true')]",
+        "multiple_title_option": "CS: select > :checked"
+    },
+    "cell_checkbox": "CS: input[type='checkbox']",
+    "cell_checkbox_checked": "CS: input[type='checkbox']:checked",
+    "following_label": "XP: ./following-sibling::label",
+    "cell_radio": "CS: input[type='radio']",
+    "cell_radio_checked": "CS: input[type='radio']:checked",
+    
+    "datatable_processing": "XP: .//*[@class='dataTables_processing card']",
+    "datatable_container": "XP: ./ancestor::div[contains(@class, 'dataTables_wrapper')]",
+    "datatable_entries_label": "XP: .//*[@class='dataTables_info']",
+    "datatable_container_next_page_btn": "XP: .//*[@class='paginate_button page-item next']",
+    "datatable_container_first_page_btn": "XP: .//*[contains(@class, 'paginate_button page-item') and not(contains(@class, 'previous'))]"
+}

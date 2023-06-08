@@ -1,0 +1,101 @@
+{
+    "auth": {
+        "user": "sndbx-83",
+        "pass": "VZs0wLbdZtp5mi2hufbQ",
+        "url": "demo.platforma365.com"
+    },
+    "start_page": null,
+    "datetime_format": "%d-%m-%Y %H:%M",
+    "date_format": "%d-%m-%Y",
+    "steps": {
+        "list_of_companies": {
+            "route": [click: nav_btn],
+            "steps": {
+                "company_info": {
+                    "route": [
+                        find: search_bar_path,
+                        input: MCI,
+                        click: table_first_row
+                        // wait_until: wait_el
+                    ],
+                    "steps": {
+                        "overviewing": {
+                            // "onLoad": ["overviewing"],
+                        },
+                        "general_info": {
+                            "route": [sidebar_general_info],
+                            // "working_area": working_area,
+                            "steps": {
+                                "contact_info": {
+                                    "type": "table",
+                                    // "route": [contact_info_table_path],
+                                    "table_path": "XP: ...",
+
+                                    "table_type": "vertical|horizontal|info-rows|one-celled",
+
+                                    "to_test": ["refresh|static", "sort", "search", "pagination", "edit"],
+
+                                    "on_start": [null],
+                                    "on_iteration": [null],
+                                    "on_end": [null],
+                                    
+                                    "fields": null,
+                                    "infoRowFields": null,
+                                    //"changeObject": "random|"
+                                },
+                                "custom_fields": {
+                                    "type": "table",
+                                    ...,
+                                    on_iteration: checkCheckBox,
+                                    on_end: clickAddToReportNotesAndReadThem
+                                }
+                            }
+                        },
+                        "documents_storage": {
+                            "route": [click: sidebar_documents_storage],
+                            "steps": {
+                                "documents_storage": {
+                                    "type": "documents_storage",
+                                    "to_test": ["refresh", "sort-type", "sort-alphabetic", "preview-view", "preview-columns", "search", "type-correspondance", "edit"]
+                                }
+                            }
+                        },
+                        "link_to_upload": {
+                            "route": [click: sidebar_link_to_upload],
+                            "steps": {
+                                "upload_link_list": {
+                                    "type": "table",
+                                    // "route": [return: upload_link_list_path], // Where used?
+                                    "on_iteration": [
+                                        "expand_test_rows",
+                                        "compare_both_tables",
+                                        "upload_file",
+                                        "compare_both_tables"
+                                    ],
+                                    "on_end": ["test_link_controls"]
+                                },
+                                "email_history": {
+                                }
+                            }
+                        },
+                        "list_of_statuses": {
+                            "route": ["sidebar_link_to_upload"],
+                            "steps": {
+                                "compliance_statuses": {
+                                    "type": "table",
+                                    "route": [return: compliance_statuses_table_path],
+
+                                    "table_type": "horizontal",
+
+                                    "to_test": ["refresh|", "edit|10"],
+                                    "on_before_edit": ["read_last_status_change_log"],
+                                    "on_after_edit": ["read_new_status_change_log"]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

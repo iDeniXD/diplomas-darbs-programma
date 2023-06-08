@@ -1,0 +1,2 @@
+* Refresh after save, check that it works fine. BUG example: Business Description. After saving base activity, 
+you can refresh and then you will be able to choose subactivity in base
